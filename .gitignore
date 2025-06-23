@@ -177,10 +177,6 @@ Thumbs.db
 config.json
 secrets.json
 
-# Large data files (CSV files with test data)
-*.csv
-test_run_*.csv
-Test_Project_ICD10_Dataset.csv
 
 # Large XML and PDF files (but NOT the essential ICD-10 reference files)
 # Note: The essential ICD-10 files are explicitly allowed below

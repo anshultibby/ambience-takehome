@@ -35,7 +35,7 @@ from icd_processing import (
 def validate_requirements(api_key: str, transcript: str) -> tuple[bool, str]:
     """Validate that all requirements are met before processing"""
     if not api_key:
-        return False, "Please enter your OpenAI API key in the sidebar."
+        return False, "Please enter your Gemini API key (preferred) or OpenAI API key (fallback) in the sidebar."
     
     if not transcript.strip():
         return False, "Please enter a medical transcript."
@@ -80,10 +80,31 @@ def render_results_section():
         st.info("Enter a transcript and click 'Analyze Transcript' to see results here.")
 
 
+def detect_api_provider(api_key: str) -> str:
+    """Detect which API provider is being used based on the API key format"""
+    if not api_key:
+        return "None"
+    elif api_key.startswith('AIza') or 'gemini' in api_key.lower():
+        return "Gemini"
+    elif api_key.startswith('sk-'):
+        return "OpenAI"
+    else:
+        return "Unknown"
+
+
 def handle_transcript_analysis(transcript: str, api_key: str, max_iterations: int):
     """Handle the transcript analysis process"""
     # Store transcript in session state
     st.session_state['transcript'] = transcript
+    
+    # Show which API provider is being used
+    provider = detect_api_provider(api_key)
+    if provider == "Gemini":
+        st.info("🤖 Using **Google Gemini** API for analysis")
+    elif provider == "OpenAI":
+        st.info("🤖 Using **OpenAI** API for analysis")
+    else:
+        st.warning("⚠️ API provider could not be detected - proceeding with analysis")
     
     # Process the transcript with the full pipeline
     with st.spinner("Processing transcript with enhanced 3-step pipeline..."):

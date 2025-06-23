@@ -99,10 +99,13 @@ def preprocess_transcript(transcript: str, api_key: str):
 
 def add_confidence_scores(chat_history: List[Dict], entries: List[Dict], api_key: str):
     """
-    Simple, fast confidence scoring function without complex error handling
+    Confidence scoring function that works with both OpenAI and Gemini APIs
     """
     if not entries:
         return entries
+    
+    # Get appropriate client and models for this API key
+    client, _, pro_model_id = get_client_and_model(api_key)
     
     # Format the chat history and entries for review
     chat_summary = "\n".join([f"{msg['role']}: {msg['content']}" for msg in chat_history])
@@ -134,7 +137,7 @@ Return as JSON array with format:
 [{{"icd10_code": "A00.0", "confidence_reasoning": "Clear evidence in transcript", "confidence": "confident"}}]"""
 
     response = client.chat.completions.create(
-        model=PRO_MODEL_ID,
+        model=pro_model_id,
         messages=[
             {"role": "system", "content": "You are a medical coding quality reviewer. Respond only with valid JSON."},
             {"role": "user", "content": prompt}
