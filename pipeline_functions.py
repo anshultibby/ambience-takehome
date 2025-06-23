@@ -16,9 +16,9 @@ from openai_tools_converter import (
 # Configuration
 load_dotenv()
 
-MODEL_ID = "gpt-4o"
-ALPHABETICAL_INDEX_PATH = "icd10cm_index_2025.xml"
-TABULAR_LIST_PATH = "icd10cm_tabular_2025.xml"
+MODEL_ID = "gemini-2.0-flash"
+ALPHABETICAL_INDEX_PATH = "data/icd10cm_index_2025.xml"
+TABULAR_LIST_PATH = "data/icd10cm_tabular_2025.xml"
 MAX_TURNS = 50
 openai_api_key = os.getenv("OPENAI_API_KEY")
 gemini_api_key = os.getenv("GEMINI_API_KEY")
@@ -35,11 +35,17 @@ def get_client_and_model(api_key: str):
             api_key=api_key,
             base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
         )
-        return client, "gemini-2.0-flash-exp", "gemini-2.0-flash-thinking-exp"
+        # Allow environment variables to override default models
+        gemini_model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+        gemini_pro_model = os.getenv("GEMINI_PRO_MODEL", "gemini-2.5-pro")
+        return client, gemini_model, gemini_pro_model
     else:
         # Use OpenAI client
         client = OpenAI(api_key=api_key)
-        return client, "gpt-4o", "gpt-4o"
+        # Allow environment variables to override default models
+        openai_model = os.getenv("OPENAI_MODEL", "gpt-4o")
+        openai_pro_model = os.getenv("OPENAI_PRO_MODEL", "gpt-4o")
+        return client, openai_model, openai_pro_model
 
 # Default client setup (will be overridden in functions)
 if gemini_api_key:

@@ -190,8 +190,9 @@ def render_file_status():
     
     st.header("File Status")
     
-    alphabetical_path = "icd10cm_index_2025.xml"
-    tabular_path = "icd10cm_tabular_2025.xml"
+    # Check for required XML files in current directory
+    alphabetical_path = "data/icd10cm_index_2025.xml"
+    tabular_path = "data/icd10cm_tabular_2025.xml"
     
     if os.path.exists(alphabetical_path):
         st.success("✅ Alphabetical Index XML found")

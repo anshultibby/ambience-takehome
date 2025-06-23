@@ -328,7 +328,7 @@ if __name__ == "__main__":
     # Step 1: Search for main term in Alphabetical Index
     print("Step 1: Search 'diabetes' in Alphabetical Index")
     print("-" * 50)
-    alphabetical_index_path = "icd10cm_index_2025.xml" 
+    alphabetical_index_path = "data/icd10cm_index_2025.xml" 
     alpha_results = lookup_alphabetical_index("diabetes", xml_file_path=alphabetical_index_path)
     
     # Show first 20 lines of the formatted output
@@ -353,7 +353,7 @@ if __name__ == "__main__":
             break
     
     if first_code:
-        tabular_list_path = "icd10cm_tabular_2025.xml"
+        tabular_list_path = "data/icd10cm_tabular_2025.xml"
         tabular_result = lookup_tabular_list(first_code, xml_file_path=tabular_list_path)
         
         if tabular_result:

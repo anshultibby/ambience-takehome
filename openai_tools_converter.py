@@ -350,8 +350,8 @@ if __name__ == "__main__":
     print("\n" + "="*50)
     print("Example Context Variables Model:")
     context = ICD10ContextVariables(
-        xml_file_path_alphabetical="icd10cm_index_2025.xml",
-        xml_file_path_tabular="icd10cm_tabular_2025.xml"
+        xml_file_path_alphabetical="data/icd10cm_index_2025.xml",
+        xml_file_path_tabular="data/icd10cm_tabular_2025.xml"
     )
     print(context.model_dump_json(indent=2))
     
