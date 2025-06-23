@@ -98,7 +98,11 @@ Guidelines:
 - When you have suspected all the codes you can emit <stop> and we will suspend the execution.
 - Prefer using tool calls to look up codes and conditions over just guessing them. 
 Once you have enough context you can use the create_icd10_suspect_entry tool to create a suspect entry.
-- Rememver you need to find all valid icd codes from this transcript, not just the primary one.
+- Remember you need to find all valid icd codes from this transcript, not just the primary one.
+- Try find codes to the right level of specificity. 
+- When using the alphabetic index, 
+prefer using single word queries as the index is only gonna give exact matches.
+so for example instead of looking for "pain, bladder" you can search for "pain" and "bladder" separately.
 """
 
 EXTRACT_ICD10_SYSTEM_PROMPT = Template(EXTRACT_ICD10_SYSTEM_PROMPT)
