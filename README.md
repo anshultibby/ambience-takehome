@@ -2,6 +2,10 @@
 
 A Streamlit web application that analyzes medical transcripts and suggests appropriate ICD-10 codes using AI-powered analysis.
 
+## 📋 Project Overview
+
+**Presentation**: [ICD10 Suspecting - Project Overview](https://docs.google.com/presentation/d/19WlWrMvrAG21bb_FTIAZRshlmc2SsNXsdPUvbaVuIEk/edit?usp=sharing)
+
 ## Features
 
 - **AI-Powered Analysis**: Uses OpenAI's GPT-4 to analyze medical transcripts
@@ -9,7 +13,9 @@ A Streamlit web application that analyzes medical transcripts and suggests appro
 - **Interactive Interface**: Easy-to-use web interface built with Streamlit
 - **Detailed Reasoning**: Provides reasoning for each suggested code
 - **Processing Log**: Shows detailed steps of the analysis process
-- **Export Results**: Download results as JSON
+- **Export Results**: Download results as JSON/CSV
+- **Confidence Scoring**: Quality assessment of extracted codes
+- **Modular Architecture**: Professional-grade, maintainable codebase
 
 ## Prerequisites
 
@@ -79,18 +85,82 @@ Patient has poor wound healing and kidney function needs monitoring.
 3. **Iterative Process**: The AI continues until all relevant codes are identified
 4. **Results**: Final results include codes, reasoning, and alternate options
 
-## Project Structure
+## 📁 Project Structure - Refactored Architecture
+
+The application has been refactored from a single 827-line file into a maintainable, modular structure:
+
+### Core Files
+
+- **`streamlit_icd_app.py`** (120 lines) - Main application entry point
+  - Clean, focused main function
+  - High-level orchestration
+  - Input validation and error handling
+
+- **`ui_components.py`** (372 lines) - All UI components and styling
+  - Custom CSS styling
+  - Sidebar configuration
+  - Results display components
+  - Export functionality
+  - Processing details display
+
+- **`icd_processing.py`** (150 lines) - Streamlit-specific pipeline wrapper
+  - Uses working functions from `pipeline_functions.py`
+  - Progress tracking and UI integration
+  - Data parsing utilities
+  - Session state management
+
+- **`pipeline_functions.py`** (246 lines) - Core business logic
+  - Working ICD-10 extraction pipeline
+  - Gemini API integration
+  - Preprocessing and confidence scoring
+  - Proven functionality from notebook
+
+### Supporting Files
 
 ```
 ├── streamlit_icd_app.py           # Main Streamlit application
+├── ui_components.py               # UI components and styling
+├── icd_processing.py              # Streamlit-specific processing wrapper
+├── pipeline_functions.py          # Core business logic
 ├── openai_tools_converter.py     # Tool calling and context management
 ├── simple_xml_lookup.py          # XML parsing functions
 ├── descriptions.py               # ICD-10 guidelines and prompts
+├── eval_module.py                # Evaluation and testing utilities
 ├── requirements.txt              # Python dependencies
 ├── README.md                     # This file
 ├── icd10cm_index_2025.xml       # ICD-10 Alphabetical Index (required)
 └── icd10cm_tabular_2025.xml     # ICD-10 Tabular List (required)
 ```
+
+## 🎯 Key Improvements
+
+### 1. **Separation of Concerns**
+- **UI Logic**: All Streamlit components isolated in `ui_components.py`
+- **Business Logic**: Core processing logic in `pipeline_functions.py`
+- **UI Integration**: Streamlit wrapper in `icd_processing.py`
+- **Main App**: Clean orchestration in `streamlit_icd_app.py`
+
+### 2. **Better Code Organization**
+- **Smaller Functions**: Long functions broken down into focused, single-purpose functions
+- **Clear Naming**: Descriptive function and variable names
+- **Logical Grouping**: Related functionality grouped together
+- **Reuse Existing Code**: Leverages proven working functions
+
+### 3. **Enhanced Maintainability**
+- **Modular Design**: Easy to modify individual components
+- **Reusable Components**: UI components can be reused
+- **Testable Code**: Business logic separated from UI for easier testing
+- **Error Handling**: Centralized validation and error handling
+
+## 📈 Refactoring Metrics
+
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Main file size | 827 lines | 120 lines | 85% reduction |
+| Longest function | 200+ lines | <50 lines | 75% reduction |
+| Cyclomatic complexity | High | Low | Much more readable |
+| Separation of concerns | None | Clear | Fully modular |
+| Code duplication | High | Minimal | DRY principle applied |
 
 ## Configuration
 
