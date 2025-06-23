@@ -41,11 +41,11 @@ def validate_requirements(api_key: str, transcript: str) -> tuple[bool, str]:
         return False, "Please enter a medical transcript."
     
     # Check for required XML files
-    alphabetical_path = "icd10cm_index_2025.xml"
-    tabular_path = "icd10cm_tabular_2025.xml"
+    alphabetical_path = "data/icd10cm_index_2025.xml"
+    tabular_path = "data/icd10cm_tabular_2025.xml"
     
     if not (os.path.exists(alphabetical_path) and os.path.exists(tabular_path)):
-        return False, "Required XML files are missing. Please ensure icd10cm_index_2025.xml and icd10cm_tabular_2025.xml are in the current directory."
+        return False, "Required XML files are missing. Please ensure icd10cm_index_2025.xml and icd10cm_tabular_2025.xml are in the data/ directory."
     
     return True, ""
 

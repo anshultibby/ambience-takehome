@@ -23,8 +23,8 @@ from openai_tools_converter import (
 
 # Configuration
 MODEL_ID = "gemini-2.5-flash"
-ALPHABETICAL_INDEX_PATH = "icd10cm_index_2025.xml"
-TABULAR_LIST_PATH = "icd10cm_tabular_2025.xml"
+ALPHABETICAL_INDEX_PATH = "data/icd10cm_index_2025.xml"
+TABULAR_LIST_PATH = "data/icd10cm_tabular_2025.xml"
 
 
 class StepTracker:
